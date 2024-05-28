@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhspflbi6c5tk"]
+
+[sub_resource type="Gradient" id="Gradient_1e2ej"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4qmix"]
+gradient = SubResource("Gradient_1e2ej")
+fill = 1
+fill_from = Vector2(0.511468, 0.513761)
+fill_to = Vector2(0, 0)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-1.52588e-05, 7.62939e-06)
+scale = Vector2(9, 5.0625)
+texture = SubResource("GradientTexture2D_4qmix")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

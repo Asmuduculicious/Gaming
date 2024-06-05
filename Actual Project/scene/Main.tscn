@@ -1,10 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnre2vuy33jbu"]
+[gd_scene load_steps=6 format=3 uid="uid://bnre2vuy33jbu"]
 
 [ext_resource type="PackedScene" uid="uid://bhspflbi6c5tk" path="res://scene/Character.tscn" id="1_08fa0"]
+[ext_resource type="Script" path="res://script/death.gd" id="2_fkhk2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d2nhh"]
+load_path = "res://.godot/imported/Untitled-1 copy.png-df0a612c58a4b50dcf190b82ab8c7f0a.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2fgd"]
+texture = SubResource("CompressedTexture2D_d2nhh")
+texture_region_size = Vector2i(4, 4)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -2, -2, 2, 2, 2, 2, -2)
+
+[sub_resource type="TileSet" id="TileSet_ijrde"]
+tile_size = Vector2i(4, 4)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_h2fgd")
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_08fa0")]
+position = Vector2(16, 16)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D"]
+script = ExtResource("2_fkhk2")
+
+[node name="Label" type="Label" parent="CharacterBody2D/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_ijrde")
 format = 2
+layer_0/tile_data = PackedInt32Array(720891, 0, 0, 720892, 0, 0, 720893, 0, 0, 720894, 0, 0, 720895, 0, 0, 655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0, 655381, 0, 0, 655382, 0, 0, 655383, 0, 0, 655384, 0, 0, 655385, 0, 0, 655386, 0, 0)

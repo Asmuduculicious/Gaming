@@ -1,18 +1,19 @@
 extends CharacterBody2D
 
-
 @export var speed := 100.0
 @export var jump_velocity = -200.0
-
-var double_jump = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var double_jump = true
+
 var weapon = 0
+var weapon_idle = ["spear_idle", "bow_idle", "gun_idle"]
+var weapon_attack = ["spear_attack", "bow_attack", "gun_attack"]
 
-	
-
+func _ready():
+	$AnimatedSprite2D2.play("spear_idle")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -45,22 +46,13 @@ func _physics_process(delta):
 		weapon += 1
 		if weapon == 3:
 			weapon = 0
-		if weapon == 0:
-			$AnimatedSprite2D.play("spear_idle")
-		if weapon == 1:
-			$AnimatedSprite2D.play("bow_idle")
-		if weapon == 2:
-			$AnimatedSprite2D.play("gun_idle")
-			
-	if weapon == 0:
-		if Input.is_action_just_pressed("ui_attack"):
-			$AnimatedSprite2D2.play("spear_attack")
-	if weapon == 1:
-		if Input.is_action_just_pressed("ui_attack"):
-				$AnimatedSprite2D2.play("bow_attack")
-	if weapon == 2:
-		if Input.is_action_just_pressed("ui_attack"):
-			$AnimatedSprite2D2.play("gun_attack")	
+		$AnimatedSprite2D2.play(weapon_idle[weapon])
+	
+	if Input.is_action_just_pressed("ui_attack"):
+		$AnimatedSprite2D2.play(weapon_attack[weapon])
+		
+	if Input.is_action_pressed("ui_attack"):
+		$AnimatedSprite2D2.play(weapon_attack[weapon])
 		
 
 

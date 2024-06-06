@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2naf47q5acu8"
-path="res://.godot/imported/Wooden platform.png-82798f56195cb3a7ea56d42eec355fc8.ctex"
+uid="uid://cpw3x2o17u4rj"
+path="res://.godot/imported/Deadtreee.png-1c5e732d98d811759559726819d907cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Wooden platform.png"
-dest_files=["res://.godot/imported/Wooden platform.png-82798f56195cb3a7ea56d42eec355fc8.ctex"]
+source_file="res://assets/Deadtreee.png"
+dest_files=["res://.godot/imported/Deadtreee.png-1c5e732d98d811759559726819d907cb.ctex"]
 
 [params]
 

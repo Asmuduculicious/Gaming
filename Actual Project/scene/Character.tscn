@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://bhspflbi6c5tk"]
+[gd_scene load_steps=116 format=3 uid="uid://bhspflbi6c5tk"]
 
 [ext_resource type="Texture2D" uid="uid://gqovf7j7a0cf" path="res://assets/CharacterWalk/Walk0.png" id="1_rha7c"]
 [ext_resource type="Script" path="res://script/character.gd" id="1_vm0fo"]
@@ -109,6 +109,7 @@
 [ext_resource type="Texture2D" uid="uid://b7gm6f7bf1l75" path="res://assets/CharacterGun/CharacterGun35.png" id="91_hyd5p"]
 [ext_resource type="Texture2D" uid="uid://cc0ftmb23e0jx" path="res://assets/CharacterGun/CharacterGun36.png" id="92_61tf7"]
 [ext_resource type="Texture2D" uid="uid://ct2vavgoh2int" path="res://assets/CharacterGun/CharacterGun37.png" id="93_4iuw3"]
+[ext_resource type="PackedScene" uid="uid://buxjeofckff06" path="res://scene/arrow.tscn" id="110_7sgu3"]
 
 [sub_resource type="Gradient" id="Gradient_1e2ej"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -117,7 +118,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_1e2ej")
 fill = 1
 fill_from = Vector2(0.511468, 0.513761)
-fill_to = Vector2(0, 0)
+fill_to = Vector2(0.137615, 0.0894495)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qqik4"]
 animations = [{
@@ -501,15 +502,20 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6p1g"]
+radius = 6.0
+height = 22.0
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_vm0fo")
+bullet_scene = ExtResource("110_7sgu3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(5.96046e-08, 9.53674e-07)
-scale = Vector2(2.80469, 1.75781)
+position = Vector2(3.49999, -9.5)
+scale = Vector2(3.45312, 1.67188)
 texture = SubResource("GradientTexture2D_4qmix")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -517,15 +523,33 @@ position = Vector2(2, -7)
 sprite_frames = SubResource("SpriteFrames_qqik4")
 animation = &"walk"
 
+[node name="arrow_spawn" type="Node2D" parent="AnimatedSprite2D"]
+position = Vector2(9, 0)
+
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -7)
 sprite_frames = SubResource("SpriteFrames_gmsn6")
-animation = &"gun_attack"
+animation = &"bow_attack"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-2, 9, -2, 8, -3, 8, -3, 6, -2, 6, -2, 5, -1, 5, -1, 4, 0, 4, 0, 5, 1, 5, 1, 6, 2, 6, 2, 9, 4, 9, 4, 8, 3, 8, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, -1, 8, -1, 8, -4, 6, -4, 6, -6, 5, -6, 5, -8, 6, -8, 6, -11, 6, -12, 0, -12, 0, -11, -1, -11, -1, -9, -2, -8, -3, -7, -4, -3, -4, 1, -5, 1, -5, 6, -4, 6, -4, 9)
+visible = false
+polygon = PackedVector2Array(-2, 9, -2, 8, -3, 8, -3, 6, -2, 6, -2, 5, -1, 5, -1, 4, 0, 4, 0, 5, 1, 5, 1, 6, 2, 6, 2, 9, 4, 9, 4, 8, 3, 8, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 2, 0, 2, -1, 6, -7, 6, -11, 6, -12, 0, -12, 0, -11, -1, -11, -1, -9, -1, -8, -2, -8, -2, -7, -3, -7, -3, -3, -4, -3, -4, 1, -5, 1, -5, 6, -4, 6, -4, 9)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-2, 9, -2, 8, -3, 8, -3, 6, -2, 6, -2, 5, -1, 5, -1, 4, 0, 4, 0, 5, 1, 5, 1, 6, 2, 6, 2, 9, 4, 9, 4, 8, 3, 8, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, -1, 8, -1, 8, -4, 6, -4, 6, -6, 5, -6, 5, -8, 6, -8, 6, -11, 6, -12, 0, -12, 0, -11, -1, -11, -1, -9, -2, -8, -3, -7, -4, -3, -4, 1, -5, 1, -5, 6, -4, 6, -4, 9)
+[node name="Node2D" parent="." instance=ExtResource("110_7sgu3")]
+position = Vector2(2, -19)
+
+[node name="Timer" type="Timer" parent="Node2D"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="Node2D"]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_p6p1g")
+
+[connection signal="timeout" from="Node2D/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Node2D/Timer2" to="." method="_on_timer_2_timeout"]

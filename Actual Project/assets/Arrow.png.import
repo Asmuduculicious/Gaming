@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2naf47q5acu8"
-path="res://.godot/imported/Wooden platform.png-82798f56195cb3a7ea56d42eec355fc8.ctex"
+uid="uid://btnhovooemxac"
+path="res://.godot/imported/Arrow.png-ecbf03ed1ef06a0646e91f5f515bdd3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Wooden platform.png"
-dest_files=["res://.godot/imported/Wooden platform.png-82798f56195cb3a7ea56d42eec355fc8.ctex"]
+source_file="res://assets/Arrow.png"
+dest_files=["res://.godot/imported/Arrow.png-ecbf03ed1ef06a0646e91f5f515bdd3d.ctex"]
 
 [params]
 

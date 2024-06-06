@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2naf47q5acu8"
-path="res://.godot/imported/Wooden platform.png-82798f56195cb3a7ea56d42eec355fc8.ctex"
+uid="uid://cuaqrmfrqjrkn"
+path="res://.godot/imported/Soil.png-1948b28bc62cc91ce3c7816c5d8012f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Wooden platform.png"
-dest_files=["res://.godot/imported/Wooden platform.png-82798f56195cb3a7ea56d42eec355fc8.ctex"]
+source_file="res://assets/Soil.png"
+dest_files=["res://.godot/imported/Soil.png-1948b28bc62cc91ce3c7816c5d8012f7.ctex"]
 
 [params]
 

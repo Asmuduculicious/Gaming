@@ -2,11 +2,12 @@ extends CharacterBody2D
 
 @export var speed := 100.0
 @export var jump_velocity = -200.0
-
+@export var bullet_scene: PackedScene
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var double_jump = true
+var can_shoot = true
 
 var weapon = 0
 var weapon_idle = ["spear_idle", "bow_idle", "gun_idle"]
@@ -49,11 +50,31 @@ func _physics_process(delta):
 		$AnimatedSprite2D2.play(weapon_idle[weapon])
 	
 	if Input.is_action_just_pressed("ui_attack"):
-		$AnimatedSprite2D2.play(weapon_attack[weapon])
-		
-	if Input.is_action_pressed("ui_attack"):
-		$AnimatedSprite2D2.play(weapon_attack[weapon])
+		if weapon == 1 and can_shoot:
+			$Node2D/Timer2.start()
+			$AnimatedSprite2D2.play(weapon_attack[weapon])
+			can_shoot = false
+		elif weapon != 1:
+			$AnimatedSprite2D2.play(weapon_attack[weapon])
 		
 
 
 	move_and_slide()
+	
+				
+func _shoot():
+	var bullet = bullet_scene.instantiate()
+	bullet.position = $AnimatedSprite2D/arrow_spawn.global_position
+	bullet.direction = $AnimatedSprite2D.scale.x
+	add_sibling(bullet)
+
+func _on_timer_timeout():
+	can_shoot = true
+		
+
+func _on_timer_2_timeout():
+	_shoot()
+	can_shoot = false
+	$Node2D/Timer.start()
+
+

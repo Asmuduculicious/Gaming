@@ -1,9 +1,17 @@
 extends Area2D
 
-var speed = 500
+@onready var character = get_node("/root/Node2D/CharacterBody2D/")
+var speed = 300
 var direction = 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	move_local_x((speed * direction) * delta)
+
+func _ready():
+	if character.weapon == 1:
+		$Arrow.texture = preload("res://assets/Arrow.png")
+	elif character.weapon == 2:
+		$Arrow.texture = preload("res://assets/bullet.png")
+		speed = 500

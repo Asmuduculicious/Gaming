@@ -533,7 +533,7 @@ sprite_frames = SubResource("SpriteFrames_gmsn6")
 animation = &"gun_attack"
 
 [node name="arrow_spawn" type="Node2D" parent="."]
-position = Vector2(11, -7)
+position = Vector2(15, -7)
 
 [node name="Node2D" parent="." instance=ExtResource("110_7sgu3")]
 position = Vector2(9, -108)

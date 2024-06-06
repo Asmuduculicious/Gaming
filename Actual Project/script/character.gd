@@ -33,18 +33,19 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction * speed
 		$AnimatedSprite2D.play("walk")
-		$AnimatedSprite2D.scale.x = direction 
-		$AnimatedSprite2D2.scale.x = direction
+		if can_shoot_bow and can_shoot_gun:
+			$AnimatedSprite2D.scale.x = direction 
+			$AnimatedSprite2D2.scale.x = direction
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
-	if Input.is_action_just_pressed("ui_spear"):
+	if Input.is_action_just_pressed("ui_spear") and can_shoot_bow and can_shoot_gun:
 		weapon = 0
 		$AnimatedSprite2D2.play(weapon_idle[weapon])
-	elif Input.is_action_just_pressed("ui_bow"):
+	elif Input.is_action_just_pressed("ui_bow") and can_shoot_bow and can_shoot_gun:
 		weapon = 1
 		$AnimatedSprite2D2.play(weapon_idle[weapon])
-	elif Input.is_action_just_pressed("ui_gun"):
+	elif Input.is_action_just_pressed("ui_gun") and can_shoot_bow and can_shoot_gun:
 		weapon = 2
 		$AnimatedSprite2D2.play(weapon_idle[weapon])
 	

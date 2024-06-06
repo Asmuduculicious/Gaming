@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnre2vuy33jbu"]
 
 [ext_resource type="PackedScene" uid="uid://bhspflbi6c5tk" path="res://scene/Character.tscn" id="1_08fa0"]
-[ext_resource type="Script" path="res://script/death.gd" id="2_fkhk2"]
+[ext_resource type="Script" path="res://script/coins.gd" id="2_fkhk2"]
 [ext_resource type="Texture2D" uid="uid://2naf47q5acu8" path="res://assets/Wooden platform.png" id="3_vra1n"]
 [ext_resource type="Texture2D" uid="uid://dnj8lrpvajys" path="res://assets/Untitled-1 copy.png" id="4_br54o"]
 

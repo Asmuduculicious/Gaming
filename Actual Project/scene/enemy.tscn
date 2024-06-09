@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp27pf2f5vm3t"]
+
+[ext_resource type="Script" path="res://script/Enemy.gd" id="1_4rkkn"]
+[ext_resource type="Texture2D" uid="uid://ypk4efr03emm" path="res://assets/Main Character copy.png" id="2_3xt1s"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g776g"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_4rkkn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CapsuleShape2D_g776g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_3xt1s")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(10, 9)
+hit_from_inside = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+scale = Vector2(18, 18)
+target_position = Vector2(1.8, 0)
+hit_from_inside = true
+
+[node name="Timer" type="Timer" parent="."]

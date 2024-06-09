@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnre2vuy33jbu"]
+[gd_scene load_steps=9 format=3 uid="uid://bnre2vuy33jbu"]
 
 [ext_resource type="PackedScene" uid="uid://bhspflbi6c5tk" path="res://scene/Character.tscn" id="1_08fa0"]
 [ext_resource type="Script" path="res://script/coins.gd" id="2_fkhk2"]
 [ext_resource type="Texture2D" uid="uid://2naf47q5acu8" path="res://assets/Wooden platform.png" id="3_vra1n"]
 [ext_resource type="Texture2D" uid="uid://dnj8lrpvajys" path="res://assets/Untitled-1 copy.png" id="4_br54o"]
+[ext_resource type="PackedScene" uid="uid://dp27pf2f5vm3t" path="res://scene/enemy.tscn" id="5_bujpe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7pd3j"]
 texture = ExtResource("3_vra1n")
@@ -55,3 +56,6 @@ offset_bottom = 23.0
 tile_set = SubResource("TileSet_ttff8")
 format = 2
 layer_0/tile_data = PackedInt32Array(720891, 2, 0, 720892, 2, 0, 720893, 2, 0, 720894, 2, 0, 720895, 2, 0, 655360, 2, 0, 655361, 2, 0, 655362, 2, 0, 655363, 2, 0, 655364, 2, 0, 655365, 2, 0, 655366, 2, 0, 655367, 2, 0, 655368, 2, 0, 655369, 2, 0, 655370, 2, 0, 655371, 2, 0, 655372, 2, 0, 655373, 2, 0, 655374, 2, 0, 655375, 2, 0, 655376, 2, 0, 655377, 2, 0, 655378, 2, 0, 655379, 2, 0, 655380, 2, 0, 655381, 2, 0, 655382, 2, 0, 655383, 2, 0, 655384, 2, 0, 655385, 2, 0, 655386, 2, 0, 23, 1, 0, 327685, 1, 0, 327686, 65537, 0, 327687, 65537, 0, 327688, 65537, 0, 327689, 65537, 1, 327690, 65537, 1, 327691, 65537, 1, 327692, 1, 1, 24, 65537, 0, 25, 65537, 0, 26, 65537, 0, 27, 65537, 1, 29, 65537, 1, 28, 65537, 1, 30, 1, 1)
+
+[node name="Enemy" parent="." instance=ExtResource("5_bujpe")]
+position = Vector2(89, 32)

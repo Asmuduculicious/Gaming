@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://bhspflbi6c5tk"]
+[gd_scene load_steps=117 format=3 uid="uid://bhspflbi6c5tk"]
 
 [ext_resource type="Texture2D" uid="uid://gqovf7j7a0cf" path="res://assets/CharacterWalk/Walk0.png" id="1_rha7c"]
 [ext_resource type="Script" path="res://script/character.gd" id="1_vm0fo"]
@@ -184,6 +184,9 @@ animations = [{
 "name": &"walk",
 "speed": 30.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jslvy"]
+size = Vector2(16, 1.5)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gmsn6"]
 animations = [{
@@ -509,13 +512,14 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_vm0fo")
 bullet_scene = ExtResource("110_7sgu3")
+metadata/player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_p6p1g")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+zoom = Vector2(0.5, 0.5)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(3.49999, -9.5)
@@ -526,6 +530,14 @@ texture = SubResource("GradientTexture2D_4qmix")
 position = Vector2(2, -7)
 sprite_frames = SubResource("SpriteFrames_qqik4")
 animation = &"walk"
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
+position = Vector2(-2, 7)
+metadata/spear = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
+position = Vector2(8, -4)
+shape = SubResource("RectangleShape2D_jslvy")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -7)

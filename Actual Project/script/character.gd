@@ -14,7 +14,7 @@ var weapon_attack = ["spear_attack", "bow_attack", "gun_attack"]
 
 func _ready():
 	$AnimatedSprite2D2.play("spear_idle")
-
+	
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -81,3 +81,5 @@ func _on_timer_3_timeout():
 
 func _on_timer_4_timeout():
 	can_shoot_gun= true
+
+

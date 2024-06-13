@@ -83,3 +83,7 @@ func _on_timer_4_timeout():
 	can_shoot_gun= true
 
 
+func _on_area_2d_area_entered(area):
+	print("1")
+	if area.has_method(_dead):
+		_dead()

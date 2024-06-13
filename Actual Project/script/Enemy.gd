@@ -4,6 +4,7 @@ var speed = 20
 var direction = 1
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var rotation_speed = 0.01
 
 func _process(delta):
 	if not is_on_floor():
@@ -15,7 +16,8 @@ func _process(delta):
 		_flip()
 
 func _attack():
-	pass
+	$AnimationPlayer.play("attack")
+	
 
 func _see(body):
 	if not body.has_meta("player"):
@@ -23,20 +25,17 @@ func _see(body):
 	else:
 		_attack()
 		
-func _unsee(body):
-	if not body.has_meta("player"):
-		pass
-	else:
-		pass
 		
 func _flip():
 	velocity.x = 0
 	direction = direction * -1
 	$Sprite2D.scale.x = direction
 	velocity.x = direction * speed
+	$Area2D2.scale.x = direction
+
+func _hit(area):
+	if area.has_meta("spear"):
+		queue_free()
+		global.coins += 1
 
 
-#func _hit(area):
-	#print("111")
-	#if area.has_meta("spear"):
-		#queue_free()

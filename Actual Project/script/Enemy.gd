@@ -16,9 +16,8 @@ func _process(delta):
 		_flip()
 
 func _attack():
-	$AnimationPlayer.play("attack")
+	$AnimationPlayer.play("RESET")
 	
-
 func _see(body):
 	if not body.has_meta("player"):
 		_flip()
@@ -36,6 +35,4 @@ func _flip():
 func _hit(area):
 	if area.has_meta("spear"):
 		queue_free()
-		global.coins += 1
-
-
+		global.kills += 1

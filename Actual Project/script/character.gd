@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var jump_velocity = -200.0
 @export var bullet_scene: PackedScene
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var hp = 100
+var locked = false
 
 var double_jump = true
 var can_shoot_bow = true
@@ -13,6 +15,7 @@ var weapon_idle = ["spear_idle", "bow_idle", "gun_idle"]
 var weapon_attack = ["spear_attack", "bow_attack", "gun_attack"]
 
 func _ready():
+	hp = 100
 	$AnimatedSprite2D2.play("spear_idle")
 	
 func _physics_process(delta):
@@ -30,14 +33,16 @@ func _physics_process(delta):
 	move_and_slide()
 
 	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * speed
-		$AnimatedSprite2D.play("walk")
-		if can_shoot_bow and can_shoot_gun:
-			$AnimatedSprite2D.scale.x = direction 
-			$AnimatedSprite2D2.scale.x = direction
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+	if locked == false:
+		if direction:
+			velocity.x = direction * speed
+			$AnimatedSprite2D.play("walk")
+			if can_shoot_bow and can_shoot_gun:
+				$AnimatedSprite2D.scale.x = direction 
+				$AnimatedSprite2D2.scale.x = direction
+				$Area2D2.scale.x = direction
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
 	
 	if Input.is_action_just_pressed("ui_spear") and can_shoot_bow and can_shoot_gun:
 		weapon = 0
@@ -53,6 +58,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_attack"):
 		if weapon == 0: 
 			$AnimatedSprite2D2.play(weapon_attack[weapon])
+			$AnimationPlayer.play("spear_attack")
 		elif weapon == 1 and can_shoot_bow:
 			$Node2D/Timer.start()
 			$AnimatedSprite2D2.play(weapon_attack[weapon])
@@ -83,7 +89,26 @@ func _on_timer_4_timeout():
 	can_shoot_gun= true
 
 
-func _on_area_2d_area_entered(area):
-	print("1")
-	if area.has_method(_dead):
-		_dead()
+
+func _enemy_hit(area):
+	if area.has_meta("enemyweapon"):
+		queue_free()
+		global.dead = true
+
+
+func _enemy_hit_body(area):
+	if area.has_meta("enemyweapon"):
+		print(hp)
+		hp -= 25
+		if hp == 0:
+			queue_free()
+			global.dead = true
+		else:
+			locked = true
+			velocity.x = 1000 * -$AnimatedSprite2D.scale.x
+			velocity.y = -300
+			$Node2D/Timer5.start()
+			
+
+func _on_timer_5_timeout():
+	locked = false

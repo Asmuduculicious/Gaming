@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://bhspflbi6c5tk"]
+[gd_scene load_steps=122 format=3 uid="uid://bhspflbi6c5tk"]
 
 [ext_resource type="Texture2D" uid="uid://gqovf7j7a0cf" path="res://assets/CharacterWalk/Walk0.png" id="1_rha7c"]
 [ext_resource type="Script" path="res://script/character.gd" id="1_vm0fo"]
@@ -118,7 +118,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_1e2ej")
 fill = 1
 fill_from = Vector2(0.511468, 0.513761)
-fill_to = Vector2(0.137615, 0.0894495)
+fill_to = Vector2(0.204128, 0.172018)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qqik4"]
 animations = [{
@@ -180,9 +180,6 @@ animations = [{
 "name": &"walk",
 "speed": 30.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jslvy"]
-size = Vector2(16, 1.5)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gmsn6"]
 animations = [{
@@ -494,7 +491,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"spear_attack",
-"speed": 30.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -505,39 +502,119 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="Animation" id="Animation_kms8e"]
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D2/spear:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D2/spear:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7, -3.5), Vector2(3, -3.5), Vector2(9, -3.5), Vector2(7, -3.5)]
+}
+
+[sub_resource type="Animation" id="Animation_2jy8p"]
+resource_name = "spear_attack"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D2/spear:disabled")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.65, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D2/spear:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.65, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 2,
+"values": [Vector2(7, -3.5), Vector2(5, -3.5), Vector2(10, -3.5), Vector2(7, -3.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mivp7"]
+_data = {
+"RESET": SubResource("Animation_kms8e"),
+"spear_attack": SubResource("Animation_2jy8p")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jslvy"]
+size = Vector2(14, 1)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6p1g"]
 radius = 6.0
 height = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_matda"]
+radius = 3.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4joh"]
+radius = 4.0
+height = 18.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_vm0fo")
 metadata/player = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(10, 10)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(3.49999, -9.5)
 scale = Vector2(3.45312, 1.67188)
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_4qmix")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -7)
+position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_qqik4")
 animation = &"walk"
 
-[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
-position = Vector2(-2, 7)
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_gmsn6")
+animation = &"spear_attack"
+frame = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mivp7")
+}
+
+[node name="Area2D2" type="Area2D" parent="."]
 metadata/spear = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
-position = Vector2(8, -4)
+[node name="spear" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(7, -3.5)
 shape = SubResource("RectangleShape2D_jslvy")
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, -7)
-sprite_frames = SubResource("SpriteFrames_gmsn6")
-animation = &"gun_attack"
+disabled = true
 
 [node name="arrow_spawn" type="Node2D" parent="."]
 position = Vector2(15, -7)
@@ -560,18 +637,32 @@ one_shot = true
 wait_time = 1.131
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -2)
-shape = SubResource("CapsuleShape2D_p6p1g")
+[node name="Timer5" type="Timer" parent="Node2D"]
+wait_time = 0.7
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_p6p1g")
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(21, -38)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-21, 29)
+shape = SubResource("CircleShape2D_matda")
+metadata/head = true
+
+[node name="Area2D3" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D3"]
+shape = SubResource("CapsuleShape2D_q4joh")
+metadata/body = false
+
 [connection signal="timeout" from="Node2D/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Node2D/Timer2" to="." method="_on_timer_2_timeout"]
 [connection signal="timeout" from="Node2D/Timer3" to="." method="_on_timer_3_timeout"]
 [connection signal="timeout" from="Node2D/Timer4" to="." method="_on_timer_4_timeout"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Node2D/Timer5" to="." method="_on_timer_5_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_enemy_hit"]
+[connection signal="area_entered" from="Area2D3" to="." method="_enemy_hit_body"]

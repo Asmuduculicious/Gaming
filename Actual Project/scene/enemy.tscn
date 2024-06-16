@@ -120,5 +120,4 @@ libraries = {
 }
 
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_see"]
-[connection signal="body_exited" from="Sprite2D/Area2D" to="." method="_unsee"]
 [connection signal="area_entered" from="Area2D" to="." method="_hit"]

@@ -60,35 +60,34 @@ func _physics_process(delta):
 			$AnimatedSprite2D2.play(weapon_attack[weapon])
 			$AnimationPlayer.play("spear_attack")
 		elif weapon == 1 and can_shoot_bow:
-			$Node2D/Timer.start()
+			$Timer.start()
 			$AnimatedSprite2D2.play(weapon_attack[weapon])
 			can_shoot_bow = false
 		elif weapon == 2 and can_shoot_gun:
-			$Node2D/Timer3.start()
+			$Timer3.start()
 			$AnimatedSprite2D2.play(weapon_attack[weapon])
 			can_shoot_gun = false
 			
 func _shoot():
 	var bullet = bullet_scene.instantiate()
-	bullet.position = $arrow_spawn.global_position
+	bullet.global_position = $arrow_spawn.global_position
+	bullet.position.y += 200
 	bullet.direction = $AnimatedSprite2D.scale.x
 	add_sibling(bullet)
 	
 func _on_timer_timeout():
 	_shoot()
-	$Node2D/Timer2.start()
+	$Timer2.start()
 
 func _on_timer_2_timeout():
 	can_shoot_bow = true
 		
 func _on_timer_3_timeout():
 	_shoot()
-	$Node2D/Timer4.start()
+	$Timer4.start()
 
 func _on_timer_4_timeout():
 	can_shoot_gun= true
-
-
 
 func _enemy_hit(area):
 	if area.has_meta("enemyweapon"):
@@ -107,7 +106,7 @@ func _enemy_hit_body(area):
 			locked = true
 			velocity.x = 1000 * -$AnimatedSprite2D.scale.x
 			velocity.y = -300
-			$Node2D/Timer5.start()
+			$Timer5.start()
 			
 
 func _on_timer_5_timeout():

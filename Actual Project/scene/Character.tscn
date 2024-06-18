@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://bhspflbi6c5tk"]
+[gd_scene load_steps=121 format=3 uid="uid://bhspflbi6c5tk"]
 
 [ext_resource type="Texture2D" uid="uid://gqovf7j7a0cf" path="res://assets/CharacterWalk/Walk0.png" id="1_rha7c"]
 [ext_resource type="Script" path="res://script/character.gd" id="1_vm0fo"]
@@ -572,19 +572,17 @@ size = Vector2(14, 1)
 radius = 6.0
 height = 22.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_matda"]
-radius = 3.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4joh"]
 radius = 4.0
-height = 18.0
+height = 22.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_vm0fo")
+bullet_scene = ExtResource("110_7sgu3")
 metadata/player = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(10, 10)
+zoom = Vector2(2, 2)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(3.49999, -9.5)
@@ -617,52 +615,42 @@ shape = SubResource("RectangleShape2D_jslvy")
 disabled = true
 
 [node name="arrow_spawn" type="Node2D" parent="."]
-position = Vector2(15, -7)
-
-[node name="Node2D" parent="." instance=ExtResource("110_7sgu3")]
-position = Vector2(9, -108)
-
-[node name="Timer" type="Timer" parent="Node2D"]
-one_shot = true
-
-[node name="Timer2" type="Timer" parent="Node2D"]
-wait_time = 0.3
-one_shot = true
-
-[node name="Timer3" type="Timer" parent="Node2D"]
-wait_time = 0.3
-one_shot = true
-
-[node name="Timer4" type="Timer" parent="Node2D"]
-wait_time = 1.131
-one_shot = true
-
-[node name="Timer5" type="Timer" parent="Node2D"]
-wait_time = 0.7
-one_shot = true
+position = Vector2(0, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_p6p1g")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(21, -38)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-21, 29)
-shape = SubResource("CircleShape2D_matda")
-metadata/head = true
+metadata/player = true
 
 [node name="Area2D3" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_q4joh")
 metadata/body = false
 
-[connection signal="timeout" from="Node2D/Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Node2D/Timer2" to="." method="_on_timer_2_timeout"]
-[connection signal="timeout" from="Node2D/Timer3" to="." method="_on_timer_3_timeout"]
-[connection signal="timeout" from="Node2D/Timer4" to="." method="_on_timer_4_timeout"]
-[connection signal="timeout" from="Node2D/Timer5" to="." method="_on_timer_5_timeout"]
-[connection signal="area_entered" from="Area2D" to="." method="_enemy_hit"]
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Timer4" type="Timer" parent="."]
+wait_time = 1.131
+one_shot = true
+
+[node name="Timer5" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
 [connection signal="area_entered" from="Area2D3" to="." method="_enemy_hit_body"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
+[connection signal="timeout" from="Timer4" to="." method="_on_timer_4_timeout"]
+[connection signal="timeout" from="Timer5" to="." method="_on_timer_5_timeout"]

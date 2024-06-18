@@ -65,7 +65,7 @@ _data = {
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_4rkkn")
-metadata/Enemy = false
+metadata/Enemy = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -92,6 +92,7 @@ hit_from_inside = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_g776g")
+metadata/enemy = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

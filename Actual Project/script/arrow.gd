@@ -11,7 +11,17 @@ func _process(delta):
 
 func _ready():
 	if character.weapon == 1:
+		speed = 300
 		$Arrow.texture = preload("res://assets/Arrow.png")
 	elif character.weapon == 2:
 		$Arrow.texture = preload("res://assets/bullet.png")
-		speed = 500
+		speed = 500 
+
+	
+
+
+func _on_body_entered(body):
+	if not body.has_meta("player"):
+		if body.has_method("_die"):
+			body._die()
+		queue_free()

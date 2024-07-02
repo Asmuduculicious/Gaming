@@ -598,8 +598,7 @@ animation = &"walk"
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_gmsn6")
-animation = &"spear_attack"
-frame = 12
+animation = &"bow_attack"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -648,9 +647,13 @@ one_shot = true
 wait_time = 0.7
 one_shot = true
 
+[node name="Timer6" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Area2D3" to="." method="_enemy_hit_body"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
 [connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
 [connection signal="timeout" from="Timer4" to="." method="_on_timer_4_timeout"]
 [connection signal="timeout" from="Timer5" to="." method="_on_timer_5_timeout"]
+[connection signal="timeout" from="Timer6" to="." method="_on_timer_6_timeout"]

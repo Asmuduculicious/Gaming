@@ -89,25 +89,33 @@ func _on_timer_3_timeout():
 func _on_timer_4_timeout():
 	can_shoot_gun= true
 
-func _enemy_hit(area):
-	if area.has_meta("enemyweapon"):
-		queue_free()
-		global.dead = true
-
 
 func _enemy_hit_body(area):
 	if area.has_meta("enemyweapon"):
 		print(hp)
 		hp -= 25
 		if hp == 0:
-			queue_free()
+			$Area2D2/CollisionShape2D.disabled = true
+			$Area2D2.hide()
+			$Area2D2.set_visible(false)
+			$AnimatedSprite2D.hide()
+			$AnimatedSprite2D2.hide()
+			$CollisionShape2D.disabled = true
+			$Area2D3.hide()
+			$Area2D3/CollisionShape2D2.disabled = true
+			$Timer6.start()
 			global.dead = true
 		else:
 			locked = true
-			velocity.x = 1000 * -$AnimatedSprite2D.scale.x
+			print(area.scale.x)
+			velocity.x = 600 * area.scale.x
 			velocity.y = -300
 			$Timer5.start()
 			
 
 func _on_timer_5_timeout():
 	locked = false
+
+
+func _on_timer_6_timeout():
+	queue_free()

@@ -1,20 +1,17 @@
 [gd_scene load_steps=9 format=3 uid="uid://dp27pf2f5vm3t"]
 
 [ext_resource type="Script" path="res://script/Enemy.gd" id="1_4rkkn"]
-[ext_resource type="Texture2D" uid="uid://ypk4efr03emm" path="res://assets/Main Character copy.png" id="2_3xt1s"]
+[ext_resource type="Texture2D" uid="uid://ck7u58uwiy0jq" path="res://assets/Enemysword.png" id="2_1yedm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g776g"]
 radius = 8.0
 height = 32.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y611d"]
-size = Vector2(22, 28)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_733eg"]
-radius = 5.12947
-height = 30.7768
-
 [sub_resource type="Animation" id="Animation_3lvw1"]
+length = 1.5
+
+[sub_resource type="Animation" id="Animation_k4hnw"]
+resource_name = "attack"
 length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -41,51 +38,47 @@ tracks/1/keys = {
 "values": [true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_k4hnw"]
-resource_name = "attack"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D2:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.2, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [3.48787e-16, -0.785398, 0.698132, 3.48787e-16]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8tq5w"]
 _data = {
 "RESET": SubResource("Animation_3lvw1"),
 "attack": SubResource("Animation_k4hnw")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fil7"]
+size = Vector2(16, 2)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_733eg"]
+radius = 5.12947
+height = 30.7768
+
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_4rkkn")
-metadata/Enemy = true
+metadata/enemy = true
+
+[node name="Enemysword" type="Sprite2D" parent="."]
+position = Vector2(2.08165e-12, -6)
+texture = ExtResource("2_1yedm")
+
+[node name="RayCast2D" type="RayCast2D" parent="Enemysword"]
+position = Vector2(0, 14)
+target_position = Vector2(8, 5)
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="Enemysword"]
+position = Vector2(2.08165e-12, -1)
+rotation = -1.57079
+collide_with_areas = true
+
+[node name="RayCast2D3" type="RayCast2D" parent="Enemysword"]
+position = Vector2(2.08165e-12, -1)
+rotation = -1.57079
+target_position = Vector2(2.08165e-12, 25)
+collide_with_areas = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_g776g")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
-texture = ExtResource("2_3xt1s")
-
-[node name="Area2D" type="Area2D" parent="Sprite2D"]
-position = Vector2(0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
-position = Vector2(11, 0)
-shape = SubResource("RectangleShape2D_y611d")
-
-[node name="RayCast2D" type="RayCast2D" parent="Sprite2D"]
-position = Vector2(5, 16)
-target_position = Vector2(8, 5)
-hit_from_inside = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -94,12 +87,25 @@ position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_g776g")
 metadata/enemy = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8tq5w")
+}
+
+[node name="Area2D3" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_7fil7")
+
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Timer2" type="Timer" parent="."]
+
 [node name="Area2D2" type="Area2D" parent="."]
-position = Vector2(0, -7)
-scale = Vector2(1.55962, 1.1744)
+position = Vector2(-1.19209e-07, -7)
+scale = Vector2(1.4, 1.054)
 metadata/enemyweapon = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
@@ -115,10 +121,13 @@ offset_right = 33.0
 offset_bottom = 33.0
 scale = Vector2(0.413904, 0.0238759)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_8tq5w")
-}
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
 
-[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_see"]
 [connection signal="area_entered" from="Area2D" to="." method="_hit"]
+[connection signal="body_entered" from="Area2D3" to="." method="_on_area_2d_3_body_entered"]
+[connection signal="body_exited" from="Area2D3" to="." method="_on_area_2d_3_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]

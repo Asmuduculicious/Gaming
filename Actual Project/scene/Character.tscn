@@ -102,7 +102,7 @@
 [ext_resource type="Texture2D" uid="uid://mbcj4ddc5s7p" path="res://assets/CharacterGun/CharacterGun28.png" id="84_gppbe"]
 [ext_resource type="Texture2D" uid="uid://8d61t8jr8yd7" path="res://assets/CharacterGun/CharacterGun29.png" id="85_671yw"]
 [ext_resource type="Texture2D" uid="uid://d1hgd2ebydjis" path="res://assets/CharacterGun/CharacterGun30.png" id="86_mbl3x"]
-[ext_resource type="Texture2D" uid="uid://d4en35hvg8lke" path="res://assets/CharacterGun/CharacterGun31.png" id="87_rfcld"]
+[ext_resource type="Texture2D" uid="uid://b6ye78fai02tc" path="res://assets/CharacterGun/CharacterGun31.png" id="87_rfcld"]
 [ext_resource type="Texture2D" uid="uid://nhi8tuudem6k" path="res://assets/CharacterGun/CharacterGun32.png" id="88_mx8oo"]
 [ext_resource type="Texture2D" uid="uid://472h0ube17o1" path="res://assets/CharacterGun/CharacterGun33.png" id="89_los36"]
 [ext_resource type="Texture2D" uid="uid://duylglfktdogo" path="res://assets/CharacterGun/CharacterGun34.png" id="90_4v676"]
@@ -598,7 +598,7 @@ animation = &"walk"
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_gmsn6")
-animation = &"bow_attack"
+animation = &"gun_attack"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

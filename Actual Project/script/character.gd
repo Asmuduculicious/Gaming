@@ -95,7 +95,7 @@ func _enemy_hit_body(area):
 		print(hp)
 		hp -= 25
 		if hp == 0:
-			$Area2D2/CollisionShape2D.disabled = true
+			$Area2D2/spear.disabled = true
 			$Area2D2.hide()
 			$Area2D2.set_visible(false)
 			$AnimatedSprite2D.hide()

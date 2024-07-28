@@ -5,7 +5,7 @@ var y = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(20):
+	for i in range(0):
 		var new_enemy = enemy.instantiate()
 		new_enemy.name = new_enemy.name + str(i)
 		add_child(new_enemy)
@@ -24,7 +24,7 @@ func _on_timer_timeout():
 		new_enemy.position = Vector2(x, y)
 		new_enemy.speed = randi_range(30,100)
 	
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_button_pressed():

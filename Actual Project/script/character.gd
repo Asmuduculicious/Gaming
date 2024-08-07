@@ -90,8 +90,16 @@ func _on_timer_4_timeout():
 	can_shoot_gun= true
 
 
-func _enemy_hit_body(area):
-	if area.has_meta("enemyweapon"):
+func _on_timer_5_timeout():
+	locked = false
+
+
+func _on_timer_6_timeout():
+	queue_free()
+
+
+func enemy_hit_body(area):
+	if area.has_meta("enemy_weapon"):
 		print(hp)
 		hp -= 25
 		if hp == 0:
@@ -105,17 +113,10 @@ func _enemy_hit_body(area):
 			$Area2D3/CollisionShape2D2.disabled = true
 			$Timer6.start()
 			global.dead = true
+			get_tree().change_scene_to_file("res://scene/Dead.tscn")
 		else:
 			locked = true
 			print(area.scale.x)
 			velocity.x = 600 * area.scale.x
 			velocity.y = -300
 			$Timer5.start()
-			
-
-func _on_timer_5_timeout():
-	locked = false
-
-
-func _on_timer_6_timeout():
-	queue_free()

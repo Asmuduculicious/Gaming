@@ -606,7 +606,7 @@ libraries = {
 }
 
 [node name="Area2D2" type="Area2D" parent="."]
-metadata/spear = true
+metadata/player_weapon = true
 
 [node name="spear" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2(7, -3.5)
@@ -622,6 +622,7 @@ shape = SubResource("CapsuleShape2D_p6p1g")
 metadata/player = true
 
 [node name="Area2D3" type="Area2D" parent="."]
+metadata/player = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D3"]
 position = Vector2(0, -2)
@@ -650,7 +651,7 @@ one_shot = true
 [node name="Timer6" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="area_entered" from="Area2D3" to="." method="_enemy_hit_body"]
+[connection signal="area_entered" from="Area2D3" to="." method="enemy_hit_body"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
 [connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]

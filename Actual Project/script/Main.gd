@@ -5,6 +5,7 @@ var y = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	global.current_level = "tutorial"
 	for i in range(0):
 		var new_enemy = enemy.instantiate()
 		new_enemy.name = new_enemy.name + str(i)
@@ -13,21 +14,3 @@ func _ready():
 		y = randi_range(-2000,0)
 		new_enemy.position = Vector2(x, y)
 		new_enemy.speed = randi_range(30,100)
-	$Timer.start()
-	
-func _on_timer_timeout():
-	if global.dead == false:
-		var new_enemy = enemy.instantiate()
-		add_child(new_enemy)
-		x = randi_range(-600,600)
-		y = randi_range(-2000,0)
-		new_enemy.position = Vector2(x, y)
-		new_enemy.speed = randi_range(30,100)
-	
-func _process(_delta):
-	pass
-
-func _on_button_pressed():
-	global.dead = false
-	get_tree().reload_current_scene()
-

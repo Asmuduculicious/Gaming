@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsde6jcu1obly"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ilohd"]
+radius = 31.0
+height = 66.0
+
+[sub_resource type="Gradient" id="Gradient_mmajs"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0fi2i"]
+gradient = SubResource("Gradient_mmajs")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.2, 0.9)
+metadata/_snap_enabled = true
+
+[node name="Area2D" type="Area2D"]
+metadata/Exit = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(21, 21)
+shape = SubResource("CapsuleShape2D_ilohd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.388235, 0.388235, 0.388235, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(21, 21)
+scale = Vector2(3.04688, 2.8125)
+texture = SubResource("GradientTexture2D_0fi2i")

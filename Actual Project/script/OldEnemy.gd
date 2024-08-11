@@ -7,6 +7,7 @@ var rotation_speed = 0.01
 var on_top = false
 var flipped = false
 var attacked = false
+@onready var global = get_node("/root/GlobalVar")
 
 func _process(delta):
 	move_and_slide()

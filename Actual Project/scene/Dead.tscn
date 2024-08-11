@@ -6,10 +6,10 @@
 script = ExtResource("1_yll8y")
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 310.0
-offset_top = 203.0
-offset_right = 863.0
-offset_bottom = 440.0
+offset_left = 317.0
+offset_top = 219.0
+offset_right = 870.0
+offset_bottom = 456.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 73
 text = "YOU HAVE DIED"

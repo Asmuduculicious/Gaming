@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://buxjeofckff06"]
 
-[ext_resource type="Script" path="res://script/arrow.gd" id="1_y7or0"]
+[ext_resource type="Script" path="res://script/PlayerBullet.gd" id="1_y7or0"]
 [ext_resource type="Texture2D" uid="uid://btnhovooemxac" path="res://assets/Arrow.png" id="2_0f2o8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tqeq"]

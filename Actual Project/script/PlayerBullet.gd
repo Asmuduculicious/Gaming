@@ -17,9 +17,6 @@ func _ready():
 		$Arrow.texture = preload("res://assets/bullet.png")
 		speed = 500 
 
-
 func _on_body_entered(body):
-	if not body.has_meta("player"):
-		if body.has_method("_die"):
-			body._die()
+	if !body.has_meta("player"):
 		queue_free()

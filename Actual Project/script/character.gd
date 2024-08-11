@@ -4,18 +4,18 @@ extends CharacterBody2D
 @export var jump_velocity = -200.0
 @export var bullet_scene: PackedScene
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var hp = 100
 var locked = false
-
 var double_jump = true
 var can_shoot_bow = true
 var can_shoot_gun = true
 var weapon = 0
 var weapon_idle = ["spear_idle", "bow_idle", "gun_idle"]
 var weapon_attack = ["spear_attack", "bow_attack", "gun_attack"]
+@onready var global = get_node("/root/GlobalVar")
 
 func _ready():
-	hp = 100
+	$Label.visible = false
+	global.hp = 100
 	$AnimatedSprite2D2.play("spear_idle")
 	
 func _physics_process(delta):
@@ -60,14 +60,25 @@ func _physics_process(delta):
 			$AnimatedSprite2D2.play(weapon_attack[weapon])
 			$AnimationPlayer.play("spear_attack")
 		elif weapon == 1 and can_shoot_bow:
-			$Timer.start()
-			$AnimatedSprite2D2.play(weapon_attack[weapon])
-			can_shoot_bow = false
+			if global.arrow > 0:
+				global.bullet -= 1
+				$Timer.start()
+				$AnimatedSprite2D2.play(weapon_attack[weapon])
+				can_shoot_bow = false
+			else:
+				$Timer7.start()
+				$Label.visible = true
 		elif weapon == 2 and can_shoot_gun:
-			$Timer3.start()
-			$AnimatedSprite2D2.play(weapon_attack[weapon])
-			can_shoot_gun = false
+			if global.bullet > 0:
+				global.bullet -= 1
+				$Timer3.start()
+				$AnimatedSprite2D2.play(weapon_attack[weapon])
+				can_shoot_gun = false
+			else:
+				$Label.visible = true
+				$Timer7.start()
 			
+
 func _shoot():
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = $arrow_spawn.global_position
@@ -100,19 +111,8 @@ func _on_timer_6_timeout():
 
 func enemy_hit_body(area):
 	if area.has_meta("enemy_weapon"):
-		print(hp)
-		hp -= 25
-		if hp == 0:
-			$Area2D2/spear.disabled = true
-			$Area2D2.hide()
-			$Area2D2.set_visible(false)
-			$AnimatedSprite2D.hide()
-			$AnimatedSprite2D2.hide()
-			$CollisionShape2D.disabled = true
-			$Area2D3.hide()
-			$Area2D3/CollisionShape2D2.disabled = true
-			$Timer6.start()
-			global.dead = true
+		global.hp -= 25
+		if global.hp == 0:
 			get_tree().change_scene_to_file("res://scene/Dead.tscn")
 		else:
 			locked = true
@@ -120,3 +120,27 @@ func enemy_hit_body(area):
 			velocity.x = 600 * area.scale.x
 			velocity.y = -300
 			$Timer5.start()
+	if area.has_meta("Exit"):
+		get_tree().change_scene_to_file("res://scene/LevelSelection.tscn")
+		if global.current_level == "Tutorial":
+			global.tutorial = true
+		if global.current_level == "Level_1":
+			global.level_1 = true
+		if global.current_level == "Level_2":
+			global.level_2 = true
+		if global.current_level == "Level_3":
+			global.level_3 = true
+		if global.current_level == "Level_4":
+			global.level_4 = true
+		if global.current_level == "Level_5":
+			global.level_5 = true
+	if area.has_meta("Spike") and area.in_pit:
+		global.hp -= 50
+		if global.hp == 0:
+			get_tree().change_scene_to_file("res://scene/Dead.tscn")
+		else:
+			velocity.y = area.spikiness
+
+
+func _on_timer_7_timeout():
+	$Label.visible = false

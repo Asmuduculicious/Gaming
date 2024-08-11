@@ -4,5 +4,5 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	global.current_level = "Tutorial"
+	global.current_level = "Level_1"
 	global.arrow += 10

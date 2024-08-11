@@ -1,7 +1,7 @@
 [gd_scene load_steps=121 format=3 uid="uid://bhspflbi6c5tk"]
 
 [ext_resource type="Texture2D" uid="uid://gqovf7j7a0cf" path="res://assets/CharacterWalk/Walk0.png" id="1_rha7c"]
-[ext_resource type="Script" path="res://script/character.gd" id="1_vm0fo"]
+[ext_resource type="Script" path="res://script/Character.gd" id="1_vm0fo"]
 [ext_resource type="Texture2D" uid="uid://br2d6mq0n61c6" path="res://assets/CharacterWalk/Walk1.png" id="2_c0w2v"]
 [ext_resource type="Texture2D" uid="uid://di47afm13p56m" path="res://assets/CharacterWalk/Walk2.png" id="3_kscma"]
 [ext_resource type="Texture2D" uid="uid://dv8q4hhwuap6k" path="res://assets/CharacterWalk/Walk3.png" id="4_7yxpt"]
@@ -569,7 +569,7 @@ _data = {
 size = Vector2(14, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6p1g"]
-radius = 6.0
+radius = 4.0
 height = 22.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4joh"]
@@ -651,6 +651,18 @@ one_shot = true
 [node name="Timer6" type="Timer" parent="."]
 one_shot = true
 
+[node name="Label" type="Label" parent="."]
+offset_left = -42.0
+offset_top = -36.0
+offset_right = 250.0
+offset_bottom = -13.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 0
+text = "You need more ammo!"
+
+[node name="Timer7" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Area2D3" to="." method="enemy_hit_body"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
@@ -658,3 +670,4 @@ one_shot = true
 [connection signal="timeout" from="Timer4" to="." method="_on_timer_4_timeout"]
 [connection signal="timeout" from="Timer5" to="." method="_on_timer_5_timeout"]
 [connection signal="timeout" from="Timer6" to="." method="_on_timer_6_timeout"]
+[connection signal="timeout" from="Timer7" to="." method="_on_timer_7_timeout"]

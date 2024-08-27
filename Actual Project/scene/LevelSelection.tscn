@@ -66,7 +66,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ee8dt")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rx3h0")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_yx2rp")
 disabled = true
-text = "Level1"
+text = "LEVEL 1"
 
 [node name="Level2Button" type="Button" parent="."]
 offset_left = 329.0
@@ -148,7 +148,7 @@ offset_top = 452.0
 offset_right = 1118.0
 offset_bottom = 536.0
 theme_override_font_sizes/font_size = 50
-text = "Level 5"
+text = "LEVEL 5"
 
 [node name="Level5Button2" type="Button" parent="."]
 offset_left = 795.0

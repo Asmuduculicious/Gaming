@@ -10,7 +10,9 @@ func _process(delta):
 
 func _ready():
 	$Arrow.texture = preload("res://assets/bullet.png")
+	print($Arrow.global_position)
 
 func _on_area_entered(area):
 	if area.has_meta("enemy") or area.has_meta("player") or area.has_meta("wall"):
+		print(area)
 		queue_free()

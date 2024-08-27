@@ -6,7 +6,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_area_area_entered(area):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://bhspflbi6c5tk"]
+[gd_scene load_steps=122 format=3 uid="uid://bhspflbi6c5tk"]
 
 [ext_resource type="Texture2D" uid="uid://gqovf7j7a0cf" path="res://assets/CharacterWalk/Walk0.png" id="1_rha7c"]
 [ext_resource type="Script" path="res://script/Character.gd" id="1_vm0fo"]
@@ -110,6 +110,7 @@
 [ext_resource type="Texture2D" uid="uid://cc0ftmb23e0jx" path="res://assets/CharacterGun/CharacterGun36.png" id="92_61tf7"]
 [ext_resource type="Texture2D" uid="uid://ct2vavgoh2int" path="res://assets/CharacterGun/CharacterGun37.png" id="93_4iuw3"]
 [ext_resource type="PackedScene" uid="uid://buxjeofckff06" path="res://scene/arrow.tscn" id="110_7sgu3"]
+[ext_resource type="PackedScene" uid="uid://xp0j12uu45a5" path="res://scene/Paused Scene.tscn" id="111_dkyyd"]
 
 [sub_resource type="Gradient" id="Gradient_1e2ej"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -662,6 +663,11 @@ text = "You need more ammo!"
 
 [node name="Timer7" type="Timer" parent="."]
 one_shot = true
+
+[node name="Node2D" parent="." instance=ExtResource("111_dkyyd")]
+visible = false
+position = Vector2(-139, -80)
+scale = Vector2(0.25, 0.25)
 
 [connection signal="area_entered" from="Area2D3" to="." method="enemy_hit_body"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

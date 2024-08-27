@@ -1,0 +1,28 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dee0agssaofnb"]
+
+[ext_resource type="Texture2D" uid="uid://2naf47q5acu8" path="res://assets/Wooden platform.png" id="1_kr7hg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s5b0y"]
+texture = ExtResource("1_kr7hg")
+texture_region_size = Vector2i(4, 4)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.984375, -2, -2, -0.828125, -2, 1.10938, -0.9375, 2, 2, 2, 2, -2)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2, -1.9375, -2)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -2, 1.01562, -2, 2, -1.01562, 2, 1.03125, 1.07812, 2, -2, 2)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
+
+[resource]
+tile_size = Vector2i(4, 4)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_s5b0y")

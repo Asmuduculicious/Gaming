@@ -61,7 +61,7 @@ func _physics_process(delta):
 			$AnimationPlayer.play("spear_attack")
 		elif weapon == 1 and can_shoot_bow:
 			if global.arrow > 0:
-				global.bullet -= 1
+				global.arrow -= 1
 				$Timer.start()
 				$AnimatedSprite2D2.play(weapon_attack[weapon])
 				can_shoot_bow = false
@@ -116,10 +116,14 @@ func enemy_hit_body(area):
 			get_tree().change_scene_to_file("res://scene/Dead.tscn")
 		else:
 			locked = true
-			print(area.scale.x)
-			velocity.x = 600 * area.scale.x
-			velocity.y = -300
-			$Timer5.start()
+			if area.has_meta("dagger"):
+				velocity.x = 600 * area.scale.x
+				velocity.y = -300
+				$Timer5.start()
+			elif area.has_meta("bullet"):
+				velocity.x = 600 * area.direction
+				velocity.y = -300
+				$Timer5.start()
 	if area.has_meta("Exit"):
 		get_tree().change_scene_to_file("res://scene/LevelSelection.tscn")
 		if global.current_level == "Tutorial":
@@ -140,7 +144,6 @@ func enemy_hit_body(area):
 			get_tree().change_scene_to_file("res://scene/Dead.tscn")
 		else:
 			velocity.y = area.spikiness
-
 
 func _on_timer_7_timeout():
 	$Label.visible = false

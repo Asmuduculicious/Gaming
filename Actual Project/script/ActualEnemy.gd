@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speed = 0
-var direction = 1
+@export var direction = 1
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var stance = ["patrolling", "alarmed", "fighting"]
 var current_stance = ""
@@ -12,7 +12,9 @@ var type = ""
 var enemy_types = ["melee", "ranged"]
 var attack_range = false
 var a = 0
+var b = 0
 @export var bullet_scene: PackedScene
+@export var arrow_pickup_scene:PackedScene
 var shot = false
 @onready var global = get_node("/root/GlobalVar")
 
@@ -35,11 +37,18 @@ func _flip():
 	else:
 		$Area2D.scale.x = 1
 		$Area2D.position.x = $Area2D.position.x * -1
+	
+	if $Area2D2.scale.x > 0.5:
+		$Area2D2.scale.x = -1
+	else:
+		$Area2D2.scale.x = 1
+		$Area2D2.position.x = $Area2D2.position.x * -1
 
 func _shoot():
 	var bullet = bullet_scene.instantiate()
-	bullet.global_position = $Gun.global_position
+	bullet.global_position = $Area2D/Gun.global_position
 	bullet.direction = $AnimatedSprite2D.scale.x
+	bullet.position.y += 200
 	add_sibling(bullet)
 
 func _ready():
@@ -54,12 +63,15 @@ func _ready():
 		$AnimatedSprite2D.play("DaggerIdle")
 	if type == enemy_types[1]:
 		$AnimatedSprite2D.play("GunIdle")
+	b = randi_range(0,1)
+	if b < 1:
+		_flip()
+	
 
-func _process(delta):
+func _physics_process(delta):
 	move_and_slide()
-
 	if $Area2D/Front.is_colliding():
-		if $Area2D/Front.get_collider().has_meta("wall"):
+		if not $Area2D/Front.get_collider() == null and $Area2D/Front.get_collider().has_meta("wall"):
 			if current_stance == stance[0]:
 				if flipped == false:
 					flipped = true
@@ -73,7 +85,8 @@ func _process(delta):
 						$FlipTimer.start()
 						_flip()
 						current_stance = stance[0]
-		if $Area2D/Front.get_collider().has_meta("enemy"):
+						
+		if not $Area2D/Front.get_collider() == null and $Area2D/Front.get_collider().has_meta("enemy"):
 			if current_stance == stance[0]:
 				if flipped == false:
 					flipped = true
@@ -82,8 +95,12 @@ func _process(delta):
 			elif current_stance == stance[1]:
 				pass
 			elif current_stance == stance[2]:
-				pass
-		if $Area2D/Front.get_collider().has_meta("player"):
+				if flipped == false:
+					flipped = true
+					$FlipTimer.start()
+					_flip()
+				
+		if not $Area2D/Front.get_collider() == null and $Area2D/Front.get_collider().has_meta("player"):
 			attack_range = true
 			if current_stance != stance[2]:
 				aware = 5
@@ -95,6 +112,7 @@ func _process(delta):
 		if type == enemy_types[0]:
 			$AnimatedSprite2D.play("DaggerAttack")
 			$AnimationPlayer.play("Dagger_Attack")
+			
 		elif type == enemy_types[1]:
 			if shot == false:
 				shot = true
@@ -102,7 +120,12 @@ func _process(delta):
 				_shoot()
 				$ShootingTimer.start()
 
-	velocity.x = direction * speed
+	if $Area2D/Ground.is_colliding():
+		if flipped == false:
+			velocity.x = direction * speed
+	else:
+		if current_stance != stance[2]:
+			_flip()
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -163,5 +186,9 @@ func _on_exit_timer_timeout():
 
 func _on_area_area_entered(area):
 	if area.has_meta("player_weapon"):
-		queue_free()
+		var k = arrow_pickup_scene.instantiate()
+		k.global_position = $Area2D/Gun.global_position
+		k.position.y += 207
+		call_deferred("add_sibling", k)
 		global.kills += 1
+		queue_free()

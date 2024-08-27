@@ -9,6 +9,7 @@ size = Vector2(7, 1)
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_yfawq")
 metadata/enemy_weapon = true
+metadata/bullet = false
 
 [node name="Arrow" type="Sprite2D" parent="."]
 position = Vector2(0.5, -0.5)

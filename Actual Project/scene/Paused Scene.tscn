@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://xp0j12uu45a5"]
+
+[ext_resource type="Script" path="res://script/Pause.gd" id="1_04jls"]
+
+[node name="Node2D" type="Node2D"]
+process_mode = 3
+z_index = 1
+script = ExtResource("1_04jls")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Area2D"]
+offset_right = 1123.0
+offset_bottom = 648.0
+color = Color(0.505882, 0.505882, 0.505882, 1)
+
+[node name="Label" type="Label" parent="Area2D"]
+offset_top = 7.0
+offset_right = 1123.0
+offset_bottom = 309.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 200
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Area2D"]
+offset_left = 445.0
+offset_top = 275.0
+offset_right = 701.0
+offset_bottom = 382.0
+text = "RESUME"
+
+[node name="Button2" type="Button" parent="Area2D"]
+offset_left = 446.0
+offset_top = 398.0
+offset_right = 701.0
+offset_bottom = 508.0
+text = "MENU"
+
+[node name="Button3" type="Button" parent="Area2D"]
+offset_left = 448.0
+offset_top = 521.0
+offset_right = 699.0
+offset_bottom = 621.0
+text = "EXIT"
+
+[node name="Button4" type="Button" parent="."]
+offset_left = 1015.0
+offset_top = 7.0
+offset_right = 1113.0
+offset_bottom = 64.0
+text = "PAUSE"
+
+[connection signal="pressed" from="Area2D/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Area2D/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Area2D/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
